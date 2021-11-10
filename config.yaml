@@ -1,0 +1,18 @@
+app:
+  env: "dev"
+  name: "ginapi-server"
+server:
+  host: "127.0.0.1"
+  port: "8080"
+mysql:
+  host: "127.0.0.1"
+  port: "3306"
+  database: "hbbs"
+  username: "homestead"
+  password: "secret"
+redis:
+  host: "127.0.0.1"
+  prot: "6379"
+jwt:
+  secret: "test"
+  expires_at: "2"
