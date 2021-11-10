@@ -2,12 +2,11 @@ package tools
 
 import (
 	"errors"
+	"ginapi/config"
 	"time"
 
 	"github.com/golang-jwt/jwt"
 )
-
-var secret = []byte("test")
 
 const TokenExpireDuration = time.Hour * 2
 
@@ -21,16 +20,16 @@ func MakeJwtToken(id int64) (string, error) {
 		id,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(TokenExpireDuration).Unix(),
-			Issuer:    "gin-api",
+			Issuer:    config.C.App.Name,
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, c)
-	return token.SignedString(secret)
+	return token.SignedString([]byte(config.C.Jwt.Secret))
 }
 
 func ParseJwtToken(tokenString string) (*MyClaims, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &MyClaims{}, func(token *jwt.Token) (i interface{}, err error) {
-		return secret, nil
+		return []byte(config.C.Jwt.Secret), nil
 	})
 	if err != nil {
 		return nil, err

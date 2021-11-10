@@ -20,7 +20,7 @@ func main() {
 	engine := gin.New()
 	engine.Use(gin.Logger(), gin.Recovery())
 
-  	server := &http.Server{
+	server := &http.Server{
 		Addr:           fmt.Sprintf("%s:%s", config.C.Server.Host, config.C.Server.Port),
 		Handler:        routes.Register(engine),
 		ReadTimeout:    10 * time.Second,

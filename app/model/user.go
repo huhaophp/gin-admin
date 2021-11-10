@@ -1,6 +1,7 @@
 package model
 
 import (
+	"database/sql"
 	"ginapi/support/db"
 	"time"
 )
@@ -8,30 +9,20 @@ import (
 type (
 	User struct {
 		Id        int64     `db:"id" json:"id" form:"id"`
-		Name      string    `db:"name" json:"name" form:"name"`
-		Email     string    `db:"email" json:"email" form:"email"`
+		Username  string    `db:"username" json:"username" form:"username"`
 		Password  string    `db:"password" json:"-" form:"password"`
 		CreatedAt time.Time `db:"created_at" json:"created_at" form:"created_at"`
 		UpdatedAt time.Time `db:"updated_at" json:"updated_at" form:"updated_at"`
 	}
 )
 
-// GetUserByName by name get user.
-func GetUserByName(name string) (error, *User) {
+// GetUserByName by username get user.
+func GetUserByName(username string) (error, *User) {
 	var user User
-	err := db.DB.Get(&user, "SELECT * FROM users WHERE name = ? limit 1", name)
-	if err != nil {
+	err := db.DB.Get(&user, "SELECT * FROM users WHERE username = ? limit 1", username)
+	if err != sql.ErrNoRows {
 		return err, nil
+	} else {
+		return nil, &user
 	}
-	return nil, &user
-}
-
-// GetUserByEmail by email get user.
-func GetUserByEmail(email string) (error, *User) {
-	var user User
-	err := db.DB.Get(&user, "SELECT * FROM users WHERE email = ? limit 1", email)
-	if err != nil {
-		return err, nil
-	}
-	return nil, &user
 }

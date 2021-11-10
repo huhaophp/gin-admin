@@ -1,14 +1,15 @@
 package config
 
 import (
-	"fmt"
 	"github.com/spf13/viper"
 	"log"
 )
 
 var (
-	C = initialize()
-	//o = sync.Once{}
+	C          = initialize()
+	configName = "config"
+	configType = "yaml"
+	configPath = "./"
 )
 
 type config struct {
@@ -16,17 +17,14 @@ type config struct {
 	Server Server `mapstructure:"server" json:"server" yaml:"server"`
 	Mysql  Mysql  `mapstructure:"mysql" json:"mysql" yaml:"mysql"`
 	Redis  Redis  `mapstructure:"redis" json:"redis" yaml:"redis"`
+	Jwt    Jwt    `mapstructure:"jwt" json:"jwt" yaml:"jwt"`
 }
 
 func initialize() *config {
 	var c config
-	fmt.Println(11111)
-	//o.Do(func() {
-	//
-	//})
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath("./")
+	viper.SetConfigName(configName)
+	viper.SetConfigType(configType)
+	viper.AddConfigPath(configPath)
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatal(err)
 	}

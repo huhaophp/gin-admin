@@ -7,12 +7,12 @@ server:
 mysql:
   host: "127.0.0.1"
   port: "3306"
-  database: "hbbs"
-  username: "homestead"
-  password: "secret"
+  database: "gin-admin"
+  username: "root"
+  password: ""
 redis:
   host: "127.0.0.1"
   prot: "6379"
 jwt:
   secret: "test"
-  expires_at: "2"
+  ttl: "2"

@@ -15,7 +15,7 @@ type authService struct{}
 
 // HandleLogin Handling user login
 func (a *authService) HandleLogin(c *gin.Context, r *admin.AuthLoginRequest) (error, gin.H) {
-	err, user := model.GetUserByName(r.Name)
+	err, user := model.GetUserByName(r.Username)
 	if err != nil {
 		return err, nil
 	}

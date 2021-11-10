@@ -3,8 +3,7 @@ package admin
 // AuthLoginRequest admin auth login request.
 type (
 	AuthLoginRequest struct {
-		Name     string `form:"name" binding:"required"`
-		Email    string `form:"email" binding:"required" `
+		Username string `form:"username" binding:"required"`
 		Password string `form:"password" binding:"required"`
 	}
 )
