@@ -1,7 +1,7 @@
 package admin
 
 import (
-	"ginapi/app/http/controller/admin"
+	"ginapi/app/http/handlers/admin"
 	"ginapi/app/http/middware"
 
 	"github.com/gin-gonic/gin"

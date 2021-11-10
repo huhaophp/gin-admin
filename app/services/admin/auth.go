@@ -13,8 +13,8 @@ func NewAuthService() *authService {
 
 type authService struct{}
 
-// HandleLogin Handling user login
-func (a *authService) HandleLogin(c *gin.Context, r *admin.AuthLoginRequest) (error, gin.H) {
+// Login Handling user login
+func (*authService) Login(c *gin.Context, r *admin.AuthLoginRequest) (error, gin.H) {
 	err, user := model.GetUserByName(r.Username)
 	if err != nil {
 		return err, nil
@@ -24,15 +24,4 @@ func (a *authService) HandleLogin(c *gin.Context, r *admin.AuthLoginRequest) (er
 		return err, nil
 	}
 	return nil, gin.H{"token": token}
-}
-
-// GetUssrInfo Handling user login
-func (a *authService) GetUssrInfo(c *gin.Context) (error, *model.User) {
-	//uid, _ := c.Get("jwt_uid")
-	//err, user := dao.User.GetUserById(uid.(int64))
-	//if err != nil {
-	//	return err, nil
-	//}
-	//return nil, user
-	return nil, nil
 }

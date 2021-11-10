@@ -1,7 +1,9 @@
 package middware
 
 import (
+	"ginapi/app/services"
 	"ginapi/tools"
+	"ginapi/tools/response"
 	"github.com/gin-gonic/gin"
 	"strings"
 )
@@ -11,19 +13,19 @@ func JWTAuthMiddleware() func(c *gin.Context) {
 	return func(c *gin.Context) {
 		authHeader := c.Request.Header.Get("Authorization")
 		if authHeader == "" {
-			tools.JsonReturnWithError(c, "auth in the request header is empty", 4001)
+			response.Message(c, "auth in the request header is empty", services.AuthErrCode)
 			c.Abort()
 			return
 		}
 		parts := strings.SplitN(authHeader, " ", 2)
 		if !(len(parts) == 2 && parts[0] == "Bearer") {
-			tools.JsonReturnWithError(c, "the auth format in the request header is incorrect", 4001)
+			response.Message(c, "the auth format in the request header is incorrect", services.AuthErrCode)
 			c.Abort()
 			return
 		}
 		mc, err := tools.ParseJwtToken(parts[1])
 		if err != nil {
-			tools.JsonReturnWithError(c, "invalid token", 4001)
+			response.Message(c, "invalid token", services.AuthErrCode)
 			c.Abort()
 			return
 		}

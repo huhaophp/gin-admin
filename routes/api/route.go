@@ -1,7 +1,7 @@
 package api
 
 import (
-	"ginapi/app/http/controller/admin"
+	"ginapi/app/http/handlers/admin"
 
 	"github.com/gin-gonic/gin"
 )
