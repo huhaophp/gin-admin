@@ -2,8 +2,8 @@ package db
 
 import (
 	"fmt"
-	"ginapi/config"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/huhaophp/gin-admin/config"
 	"github.com/jmoiron/sqlx"
 	"log"
 )

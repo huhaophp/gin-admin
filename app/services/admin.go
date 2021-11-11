@@ -1,6 +1,6 @@
 package services
 
-import "ginapi/app/services/admin"
+import "github.com/huhaophp/gin-admin/app/services/admin"
 
 var (
 	AdminAuth = admin.NewAuthService()

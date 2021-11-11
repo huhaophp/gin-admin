@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"ginapi/app/http/request/admin"
-	"ginapi/app/services"
-	"ginapi/tools/response"
+	"github.com/huhaophp/gin-admin/app/http/request/admin"
+	"github.com/huhaophp/gin-admin/app/services"
+	"github.com/huhaophp/gin-admin/tools/response"
 
 	"github.com/gin-gonic/gin"
 )

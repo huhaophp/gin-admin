@@ -2,9 +2,9 @@ package admin
 
 import (
 	"errors"
-	"ginapi/app/http/request/admin"
-	"ginapi/app/model"
-	"ginapi/tools"
+	"github.com/huhaophp/gin-admin/app/http/request/admin"
+	"github.com/huhaophp/gin-admin/app/model"
+	"github.com/huhaophp/gin-admin/tools"
 	"github.com/gin-gonic/gin"
 )
 

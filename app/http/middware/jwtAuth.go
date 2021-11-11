@@ -1,9 +1,9 @@
 package middware
 
 import (
-	"ginapi/tools"
-	"ginapi/tools/response"
 	"github.com/gin-gonic/gin"
+	"github.com/huhaophp/gin-admin/tools"
+	"github.com/huhaophp/gin-admin/tools/response"
 	"strings"
 )
 

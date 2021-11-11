@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"ginapi/app/model"
-	"ginapi/tools/response"
 	"github.com/gin-gonic/gin"
+	"github.com/huhaophp/gin-admin/app/model"
+	"github.com/huhaophp/gin-admin/tools/response"
 )
 
 var User = user{}

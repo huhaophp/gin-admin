@@ -2,7 +2,7 @@ package tools
 
 import (
 	"errors"
-	"ginapi/config"
+	"github.com/huhaophp/gin-admin/config"
 	"time"
 
 	"github.com/golang-jwt/jwt"

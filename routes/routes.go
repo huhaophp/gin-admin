@@ -1,9 +1,9 @@
 package routes
 
 import (
-	"ginapi/app/http/handlers"
-	"ginapi/app/http/middware"
 	"github.com/gin-gonic/gin"
+	"github.com/huhaophp/gin-admin/app/http/handlers"
+	"github.com/huhaophp/gin-admin/app/http/middware"
 )
 
 func Register(engine *gin.Engine) *gin.Engine {

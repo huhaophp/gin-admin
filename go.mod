@@ -1,4 +1,4 @@
-module ginapi
+module github.com/huhaophp/gin-admin
 
 go 1.16
 

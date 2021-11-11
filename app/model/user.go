@@ -2,7 +2,7 @@ package model
 
 import (
 	"database/sql"
-	"ginapi/support/db"
+	"github.com/huhaophp/gin-admin/support/db"
 	"time"
 )
 

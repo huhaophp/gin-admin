@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"ginapi/config"
-	"ginapi/routes"
-	"ginapi/support/db"
+	"github.com/huhaophp/gin-admin/config"
+	"github.com/huhaophp/gin-admin/routes"
+	"github.com/huhaophp/gin-admin/support/db"
 	"log"
 	"net/http"
 	"os"
