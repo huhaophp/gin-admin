@@ -1,7 +1,8 @@
 package model
 
 import (
-	"database/sql"
+	"errors"
+	"github.com/huhaophp/gin-admin/app/http/request"
 	"github.com/huhaophp/gin-admin/support/db"
 	"time"
 )
@@ -21,19 +22,37 @@ type (
 // GetUserByUsername by username get user.
 func GetUserByUsername(username string) (error, *User) {
 	var user User
-	err := db.DB.Get(&user, "SELECT * FROM users WHERE username = ? limit 1", username)
-	if err != nil && err != sql.ErrNoRows {
+	err := db.DB.Table("users").Where("username = ?", username).First(&user).Error
+	if err != nil {
 		return err, nil
 	}
 	return nil, &user
 }
 
-// GetUsers GetUsers
-func GetUsers() (error, []*User) {
-	var users []*User
-	err := db.DB.Select(&users, "SELECT * FROM users limit 20 offset 0")
-	if err != nil && err != sql.ErrNoRows {
-		return err, nil
+// GetUsersList GetUsers
+func GetUsersList(params *request.GetUsersListParam) (error, []*User, int64) {
+	var (
+		users []*User
+		total int64
+	)
+
+	query := db.DB.Table("users")
+	if params.Username != "" {
+		query = query.Where("username like ?", "%"+params.Username+"%")
 	}
-	return nil, users
+	if params.Email != "" {
+		query = query.Where("email like ?", "%"+params.Email+"%")
+	}
+	if params.Phone != "" {
+		query = query.Where("phone like ?", "%"+params.Phone+"%")
+	}
+
+	findError := query.Limit(params.Size).Offset((params.Page - 1) * params.Size).Find(&users).Error
+	countError := query.Count(&total).Error
+
+	if findError != nil || countError != nil {
+		return errors.New("user: find or count error"), nil, 0
+	}
+
+	return nil, users, total
 }

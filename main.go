@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/huhaophp/gin-admin/config"
 	"github.com/huhaophp/gin-admin/routes"
-	"github.com/huhaophp/gin-admin/support/db"
 	"log"
 	"net/http"
 	"os"
@@ -49,7 +48,4 @@ func main() {
 	case <-ctx.Done():
 		log.Println("timeout of 1 seconds.")
 	}
-
-	// close the service and disconnect the DB connection
-	defer db.DB.Close()
 }

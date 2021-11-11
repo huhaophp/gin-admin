@@ -6,6 +6,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type PageResult struct {
+	List  interface{} `json:"list"`
+	Total int64       `json:"total"`
+	Page  int         `json:"page"`
+	Size  int         `json:"size"`
+}
+
 func Data(ctx *gin.Context, data interface{}) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"msg":  "ok",

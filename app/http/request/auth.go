@@ -1,4 +1,4 @@
-package admin
+package request
 
 // AuthLoginRequest admin auth login request.
 type (
