@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var Auth = auth{}
+var Auth = &auth{}
 
 type auth struct{}
 
@@ -18,9 +18,9 @@ func (*auth) Login(ctx *gin.Context) {
 		response.Msg(ctx, err.Error(), 422)
 		return
 	}
-	err, user := services.AdminAuth.Login(ctx, &request)
+	err, user := services.Auth.Login(ctx, &request)
 	if err != nil {
-		response.Msg(ctx, err.Error(), 522)
+		response.Msg(ctx, err.Error(), 422)
 	} else {
 		response.Data(ctx, user)
 	}

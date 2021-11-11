@@ -1,16 +1,15 @@
-package admin
+package services
 
 import (
 	"errors"
+
+	"github.com/gin-gonic/gin"
 	"github.com/huhaophp/gin-admin/app/http/request/admin"
 	"github.com/huhaophp/gin-admin/app/model"
 	"github.com/huhaophp/gin-admin/tools"
-	"github.com/gin-gonic/gin"
 )
 
-func NewAuthService() *authService {
-	return &authService{}
-}
+var Auth = &authService{}
 
 type authService struct{}
 
