@@ -14,7 +14,7 @@ func Data(ctx *gin.Context, data interface{}) {
 	})
 }
 
-func Message(ctx *gin.Context, msg string, code int) {
+func Msg(ctx *gin.Context, msg string, code int) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"msg":  msg,
 		"code": code,

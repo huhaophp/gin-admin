@@ -54,6 +54,4 @@ func main() {
 
 	// 关闭服务断开 DB 连接
 	defer db.DB.Close()
-
-	log.Println("Server exiting")
 }

@@ -1,4 +1,4 @@
-package admin
+package handlers
 
 import (
 	"ginapi/app/http/request/admin"
@@ -8,16 +8,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Login 管理员登录 检查账号状态
-func Login(ctx *gin.Context) {
+var Auth = auth{}
+
+type auth struct{}
+
+func (*auth) Login(ctx *gin.Context) {
 	var request admin.AuthLoginRequest
 	if err := ctx.ShouldBind(&request); err != nil {
-		response.Message(ctx, err.Error(), services.ParamsErrCode)
+		response.Msg(ctx, err.Error(), 422)
 		return
 	}
 	err, user := services.AdminAuth.Login(ctx, &request)
 	if err != nil {
-		response.Message(ctx, err.Error(), services.ParamsErrCode)
+		response.Msg(ctx, err.Error(), 522)
 	} else {
 		response.Data(ctx, user)
 	}
