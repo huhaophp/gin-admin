@@ -1,8 +1,6 @@
 package model
 
 import (
-	"errors"
-	"github.com/huhaophp/gin-admin/app/http/request"
 	"github.com/huhaophp/gin-admin/support/db"
 	"time"
 )
@@ -29,30 +27,24 @@ func GetUserByUsername(username string) (error, *User) {
 	return nil, &user
 }
 
-// GetUsersList GetUsers
-func GetUsersList(params *request.GetUsersListParam) (error, []*User, int64) {
-	var (
-		users []*User
-		total int64
-	)
+// GetUsersList GetUsersList
+func GetUsersList(params map[string]interface{}) (error, []*User, int64) {
+	var total int64
+	var users []*User
 
 	query := db.DB.Table("users")
-	if params.Username != "" {
-		query = query.Where("username like ?", "%"+params.Username+"%")
+	if username, ok := params["username"]; ok && username != "" {
+		query = query.Where("username like ?", username.(string)+"%")
 	}
-	if params.Email != "" {
-		query = query.Where("email like ?", "%"+params.Email+"%")
+	if email, ok := params["email"]; ok && email != "" {
+		query = query.Where("email like ?", email.(string)+"%")
 	}
-	if params.Phone != "" {
-		query = query.Where("phone like ?", "%"+params.Phone+"%")
+	if phone, ok := params["phone"]; ok && phone != "" {
+		query = query.Where("phone like ?", phone.(string)+"%")
 	}
 
-	findError := query.Limit(params.Size).Offset((params.Page - 1) * params.Size).Find(&users).Error
-	countError := query.Count(&total).Error
-
-	if findError != nil || countError != nil {
-		return errors.New("user: find or count error"), nil, 0
-	}
+	query.Limit(params["size"].(int)).Offset((params["page"].(int) - 1) * params["size"].(int)).Find(&users)
+	query.Count(&total)
 
 	return nil, users, total
 }

@@ -3,21 +3,23 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/gin-contrib/pprof"
+	"github.com/gin-gonic/gin"
 	"github.com/huhaophp/gin-admin/config"
 	"github.com/huhaophp/gin-admin/routes"
 	"log"
 	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
-
-	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	engine := gin.New()
 	engine.Use(gin.Logger(), gin.Recovery())
+	pprof.Register(engine)
 
 	server := &http.Server{
 		Addr:           fmt.Sprintf("%s:%s", config.C.Server.Host, config.C.Server.Port),

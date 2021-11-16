@@ -18,7 +18,7 @@ func (*auth) Login(ctx *gin.Context) {
 		response.Msg(ctx, err.Error(), 422)
 		return
 	}
-	err, user := services.Auth.Login(ctx, &req)
+	err, user := services.AuthService.Login(ctx, &req)
 	if err != nil {
 		response.Msg(ctx, err.Error(), 422)
 	} else {

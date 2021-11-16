@@ -9,7 +9,7 @@ import (
 	"github.com/huhaophp/gin-admin/tools"
 )
 
-var Auth = &authService{}
+var AuthService = &authService{}
 
 type authService struct{}
 
